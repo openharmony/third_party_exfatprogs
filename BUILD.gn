@@ -18,8 +18,9 @@ import("//build/ohos.gni")
 
 group("exfatprogs") {
   deps = [
-    ":fsck.exfatprogs",
-    ":mkfs.exfatprogs",
+    ":exfatlabel",
+    ":fsck.exfat",
+    ":mkfs.exfat",
   ]
 }
 
@@ -41,7 +42,7 @@ config("exfat-defaults") {
   ]
 }
 
-ohos_shared_library("libexfatprogs") {
+ohos_shared_library("libexfat") {
   configs = [ ":exfat-defaults" ]
   sources = [ "lib/libexfat.c" ]
 
@@ -55,8 +56,8 @@ ohos_shared_library("libexfatprogs") {
 }
 
 ###################################################
-##Build mkfs.exfatprogs
-ohos_executable("mkfs.exfatprogs") {
+##Build mkfs.exfat
+ohos_executable("mkfs.exfat") {
   configs = [ ":exfat-defaults" ]
   sources = [
     "mkfs/mkfs.c",
@@ -68,7 +69,7 @@ ohos_executable("mkfs.exfatprogs") {
     "./mkfs",
   ]
 
-  deps = [ ":libexfatprogs" ]
+  deps = [ ":libexfat" ]
   install_enable = true
   subsystem_name = "filemanagement"
   part_name = "storage_service"
@@ -76,8 +77,8 @@ ohos_executable("mkfs.exfatprogs") {
 }
 
 ###################################################
-##Build fsck.exfatprogs
-ohos_executable("fsck.exfatprogs") {
+##Build fsck.exfat
+ohos_executable("fsck.exfat") {
   configs = [ ":exfat-defaults" ]
   sources = [
     "fsck/de_iter.c",
@@ -91,7 +92,7 @@ ohos_executable("fsck.exfatprogs") {
     "./fsck",
   ]
 
-  deps = [ ":libexfatprogs" ]
+  deps = [ ":libexfat" ]
   install_enable = true
   subsystem_name = "filemanagement"
   part_name = "storage_service"
@@ -99,8 +100,8 @@ ohos_executable("fsck.exfatprogs") {
 }
 
 ###################################################
-##Build dump.exfatprogs
-ohos_executable("dump.exfatprogs") {
+##Build dump.exfat
+ohos_executable("dump.exfat") {
   configs = [ ":exfat-defaults" ]
   sources = [ "dump/dump.c" ]
 
@@ -111,14 +112,14 @@ ohos_executable("dump.exfatprogs") {
     "./dump",
   ]
 
-  deps = [ ":libexfatprogs" ]
+  deps = [ ":libexfat" ]
   subsystem_name = "filemanagement"
   part_name = "storage_service"
 }
 
 ###################################################
-##Build exfatprogslable
-ohos_executable("exfatprogslable") {
+##Build exfatlabel
+ohos_executable("exfatlabel") {
   configs = [ ":exfat-defaults" ]
   sources = [ "label/label.c" ]
 
@@ -129,14 +130,14 @@ ohos_executable("exfatprogslable") {
     "./label",
   ]
 
-  deps = [ ":libexfatprogs" ]
+  deps = [ ":libexfat" ]
   subsystem_name = "filemanagement"
   part_name = "storage_service"
 }
 
 ###################################################
-##Build tune.exfatprogs
-ohos_executable("tune.exfatprogs") {
+##Build tune.exfat
+ohos_executable("tune.exfat") {
   configs = [ ":exfat-defaults" ]
   sources = [ "tune/tune.c" ]
 
@@ -147,7 +148,7 @@ ohos_executable("tune.exfatprogs") {
     "./label",
   ]
 
-  deps = [ ":libexfatprogs" ]
+  deps = [ ":libexfat" ]
   subsystem_name = "filemanagement"
   part_name = "storage_service"
 }
