@@ -50,8 +50,8 @@ ohos_shared_library("libexfat") {
 
   deps = []
   install_enable = true
-  subsystem_name = "filemanagement"
-  part_name = "storage_service"
+  subsystem_name = "thirdparty"
+  part_name = "exfatprogs"
   install_images = [ "system" ]
 }
 
@@ -71,8 +71,8 @@ ohos_executable("mkfs.exfat") {
 
   deps = [ ":libexfat" ]
   install_enable = true
-  subsystem_name = "filemanagement"
-  part_name = "storage_service"
+  subsystem_name = "thirdparty"
+  part_name = "exfatprogs"
   install_images = [ "system" ]
 }
 
@@ -94,8 +94,8 @@ ohos_executable("fsck.exfat") {
 
   deps = [ ":libexfat" ]
   install_enable = true
-  subsystem_name = "filemanagement"
-  part_name = "storage_service"
+  subsystem_name = "thirdparty"
+  part_name = "exfatprogs"
   install_images = [ "system" ]
 }
 
@@ -113,8 +113,8 @@ ohos_executable("dump.exfat") {
   ]
 
   deps = [ ":libexfat" ]
-  subsystem_name = "filemanagement"
-  part_name = "storage_service"
+  subsystem_name = "thirdparty"
+  part_name = "exfatprogs"
 }
 
 ###################################################
@@ -131,8 +131,8 @@ ohos_executable("exfatlabel") {
   ]
 
   deps = [ ":libexfat" ]
-  subsystem_name = "filemanagement"
-  part_name = "storage_service"
+  subsystem_name = "thirdparty"
+  part_name = "exfatprogs"
 }
 
 ###################################################
@@ -149,6 +149,6 @@ ohos_executable("tune.exfat") {
   ]
 
   deps = [ ":libexfat" ]
-  subsystem_name = "filemanagement"
-  part_name = "storage_service"
+  subsystem_name = "thirdparty"
+  part_name = "exfatprogs"
 }
