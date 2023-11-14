@@ -1,0 +1,46 @@
+From 7c851a74f79cdf330a854453f08b9c112cdeaab1 Mon Sep 17 00:00:00 2001
+From: Hyunchul Lee <hyc.lee@gmail.com>
+Date: Wed, 25 Oct 2023 15:29:29 +0900
+Subject: [PATCH] fsck: fix out-of-bounds write in read_file_dentry_set
+
+if SecondaryCount is greater than (2 + the max number
+of File Name entries), writing to memory outside
+the node->name could happen.
+
+Reported-by: Maxim Suhanov <dfirblog@gmail.com>
+Signed-off-by: Hyunchul Lee <hyc.lee@gmail.com>
+Reviewed-by: Yuezhang Mo <Yuezhang.Mo@sony.com>
+Signed-off-by: Namjae Jeon <linkinjeon@kernel.org>
+---
+ fsck/fsck.c            | 2 +-
+ include/exfat_ondisk.h | 1 +
+ 2 files changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/fsck/fsck.c b/fsck/fsck.c
+index 6131d13..735a062 100644
+--- a/fsck/fsck.c
++++ b/fsck/fsck.c
+@@ -969,7 +969,7 @@ static int read_file_dentries(struct exfat_de_iter *iter,
+ 		return -EINVAL;
+ 	}
+ 
+-	for (i = 2; i <= file_de->file_num_ext; i++) {
++	for (i = 2; i <= MIN(file_de->file_num_ext, 1 + MAX_NAME_DENTRIES); i++) {
+ 		ret = exfat_de_iter_get(iter, i, &name_de);
+ 		if (ret || name_de->type != EXFAT_NAME) {
+ 			exfat_err("failed to get name dentry. %d\n", ret);
+diff --git a/include/exfat_ondisk.h b/include/exfat_ondisk.h
+index b3fc1fe..08b8036 100644
+--- a/include/exfat_ondisk.h
++++ b/include/exfat_ondisk.h
+@@ -40,6 +40,7 @@
+ /* exFAT allows 8388608(256MB) directory entries */
+ #define MAX_EXFAT_DENTRIES	8388608
+ 
++#define MAX_NAME_DENTRIES	17
+ /* dentry types */
+ #define MSDOS_DELETED		0xE5	/* deleted mark */
+ #define MSDOS_UNUSED		0x00	/* end of directory */
+-- 
+2.25.1
+
