@@ -3,9 +3,9 @@
         "Name"                  : "exfatprogs",
         "License"               : "GPL-2.0-or-later",
         "License File"          : "COPYING",
-        "Version Number"        : "1.1.3",
+        "Version Number"        : "1.2.0",
         "Owner"                 : "Namjae Jeon",
-        "Upstream URL"          : "https://github.com/exfatprogs/exfatprogs/releases/download/1.1.3/exfatprogs-1.1.3.tat.gz",
+        "Upstream URL"          : "https://github.com/exfatprogs/exfatprogs/archive/refs/tags/1.2.0.tar.gz",
         "Description"           : "exFAT filesystem userspace utilities."
     }
 ]
