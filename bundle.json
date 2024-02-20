@@ -26,7 +26,22 @@
         },
         "build": {
             "sub_component": [],
-            "inner_kits": [],
+            "inner_kits": [
+                {
+                    "name": "//third_party/exfatprogs:libexfat",
+                    "header": {
+                      "header_files": [
+                        "exfat_dir.h",
+                        "exfat_fs.h",
+                        "exfat_ondisk.h",
+                        "libexfat.h",
+                        "list.h",
+                        "version.h"
+                      ],
+                      "header_base": "//third_party/exfatprogs/include"
+                    }
+                }
+            ],
             "test": []
         }
     }
