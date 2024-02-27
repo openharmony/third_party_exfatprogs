@@ -30,7 +30,7 @@ config("exfat-defaults") {
     "-Wno-error",
     "-D_FILE_OFFSET_BITS=64",
     "-DPACKAGE=\"exfatprogs\"",
-    "-DVERSION=\"1.1.3\"",
+    "-DVERSION=\"1.2.0\"",
   ]
   include_dirs = [
     "dump",
@@ -39,12 +39,17 @@ config("exfat-defaults") {
     "label",
     "mkfs",
     "tune",
+    "exfat2img",
   ]
 }
 
 ohos_shared_library("libexfat") {
   configs = [ ":exfat-defaults" ]
-  sources = [ "lib/libexfat.c" ]
+  sources = [
+    "lib/exfat_dir.c",
+    "lib/exfat_fs.c",
+    "lib/libexfat.c",
+  ]
 
   include_dirs = [ "./libexfat" ]
 
@@ -81,7 +86,6 @@ ohos_executable("mkfs.exfat") {
 ohos_executable("fsck.exfat") {
   configs = [ ":exfat-defaults" ]
   sources = [
-    "fsck/de_iter.c",
     "fsck/fsck.c",
     "fsck/repair.c",
   ]
@@ -146,6 +150,24 @@ ohos_executable("tune.exfat") {
     "./mkfs",
     "./fsck",
     "./label",
+  ]
+
+  deps = [ ":libexfat" ]
+  subsystem_name = "thirdparty"
+  part_name = "exfatprogs"
+}
+
+###################################################
+##Build exfat2img
+ohos_executable("exfat2img") {
+  configs = [ ":exfat-defaults" ]
+  sources = [ "exfat2img/exfat2img.c" ]
+
+  include_dirs = [
+    "./lib",
+    "./mkfs",
+    "./fsck",
+    "./exfat2img",
   ]
 
   deps = [ ":libexfat" ]

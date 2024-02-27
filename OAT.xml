@@ -52,9 +52,8 @@
             <policy name="projectPolicy" desc="">
                 <policyitem type="compatibility" name="GPL-2.0-or-later" path=".*" rule="may" group="defaultGroup" filefilter="defaultPolicyFilter" desc=""/>
                 <policyitem type="license" name="GPL-2.0-or-later" path=".*" desc=""/>
-                <policyitem type="copyright" name="Namjae Jeon" path=".*" rule="may" group="defaultGroup" filefilter="copyrightPolicyFilter" desc=""/>
-                <policyitem type="copyright" name="Hyunchul Lee" path=".*" rule="may" group="defaultGroup" filefilter="copyrightPolicyFilter" desc=""/>
-                <policyitem type="copyright" name="Huawei Device Co., Ltd." path=".*" rule="may" group="defaultGroup" filefilter="copyrightPolicyFilter" desc=""/>
+                <policyitem type="license" name="*" path=".*" rule="may" group="defaultGroup" filefilter="defaultPolicyFilter" desc=""/>
+                <policyitem type="copyright" name="*" path=".*" rule="may" group="defaultGroup" filefilter="defaultPolicyFilter" desc=""/>
             </policy>
         </policylist>
         <filefilterlist>
@@ -62,7 +61,7 @@
                 <filteritem type="filename" name=".travis_get_mainline_kernel|Makefile.am|autogen.sh|configure.ac|test_fsck.sh" desc="License and Copyright Header Invalid"/>
                 <filteritem type="filepath" name="manpages/.*" desc="License and Copyright Header Invalid"/>
             </filefilter>
-            <filefilter name="defaultPolicyFilter" desc="Filters for compatibility，license header policies">
+            <filefilter name="defaultPolicyFilter" desc="Filters for compatibility,license header policies">
             </filefilter>
             <filefilter name="copyrightPolicyFilter" desc="Filters for copyright header policies">
                 <filteritem type="filename" name="list.h" desc="desc files"/>
