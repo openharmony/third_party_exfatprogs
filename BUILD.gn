@@ -30,7 +30,7 @@ config("exfat-defaults") {
     "-Wno-error",
     "-D_FILE_OFFSET_BITS=64",
     "-DPACKAGE=\"exfatprogs\"",
-    "-DVERSION=\"1.2.0\"",
+    "-DVERSION=\"1.2.5\"",
   ]
   include_dirs = [
     "dump",
