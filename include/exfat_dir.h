@@ -68,6 +68,7 @@ int exfat_de_iter_get_dirty(struct exfat_de_iter *iter,
 			    int ith, struct exfat_dentry **dentry);
 int exfat_de_iter_flush(struct exfat_de_iter *iter);
 int exfat_de_iter_advance(struct exfat_de_iter *iter, int skip_dentries);
+int exfat_de_iter_revert(struct exfat_de_iter *iter, int dentries);
 off_t exfat_de_iter_device_offset(struct exfat_de_iter *iter);
 off_t exfat_de_iter_file_offset(struct exfat_de_iter *iter);
 
@@ -94,7 +95,12 @@ int exfat_add_dentry_set(struct exfat *exfat, struct exfat_dentry_loc *loc,
 			 bool need_next_loc);
 void exfat_calc_dentry_checksum(struct exfat_dentry *dentry,
 				uint16_t *checksum, bool primary);
+uint16_t calc_dentry_set_checksum(struct exfat_dentry *dset, int dcount);
 uint16_t exfat_calc_name_hash(struct exfat *exfat,
 			      __le16 *name, int len);
 
+int exfat_find_free_cluster(struct exfat *exfat, int clu_count,
+		clus_t *new_clu);
+int exfat_alloc_cluster(struct exfat *exfat, struct exfat_inode *inode,
+		clus_t *new_clu);
 #endif
