@@ -45,6 +45,7 @@ config("exfat-defaults") {
 }
 
 ohos_shared_library("libexfat") {
+  branch_protector_ret = "pac_ret"
   configs = [ ":exfat-defaults" ]
   sources = [
     "lib/exfat_dir.c",
@@ -64,6 +65,7 @@ ohos_shared_library("libexfat") {
 ###################################################
 ##Build mkfs.exfat
 ohos_executable("mkfs.exfat") {
+  branch_protector_ret = "pac_ret"
   configs = [ ":exfat-defaults" ]
   sources = [
     "mkfs/mkfs.c",
@@ -85,6 +87,7 @@ ohos_executable("mkfs.exfat") {
 ###################################################
 ##Build fsck.exfat
 ohos_executable("fsck.exfat") {
+  branch_protector_ret = "pac_ret"
   configs = [ ":exfat-defaults" ]
   sources = [
     "fsck/fsck.c",
@@ -108,6 +111,7 @@ ohos_executable("fsck.exfat") {
 ###################################################
 ##Build dump.exfat
 ohos_executable("dump.exfat") {
+  branch_protector_ret = "pac_ret"
   configs = [ ":exfat-defaults" ]
   sources = [ "dump/dump.c" ]
 
@@ -126,6 +130,7 @@ ohos_executable("dump.exfat") {
 ###################################################
 ##Build exfatlabel
 ohos_executable("exfatlabel") {
+  branch_protector_ret = "pac_ret"
   configs = [ ":exfat-defaults" ]
   sources = [ "label/label.c" ]
 
@@ -144,6 +149,7 @@ ohos_executable("exfatlabel") {
 ###################################################
 ##Build tune.exfat
 ohos_executable("tune.exfat") {
+  branch_protector_ret = "pac_ret"
   configs = [ ":exfat-defaults" ]
   sources = [ "tune/tune.c" ]
 
@@ -162,6 +168,7 @@ ohos_executable("tune.exfat") {
 ###################################################
 ##Build exfat2img
 ohos_executable("exfat2img") {
+  branch_protector_ret = "pac_ret"
   configs = [ ":exfat-defaults" ]
   sources = [ "exfat2img/exfat2img.c" ]
 
