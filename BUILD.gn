@@ -94,10 +94,7 @@ ohos_executable("mkfs.exfat") {
     "./mkfs",
   ]
 
-  deps = [
-    ":libexfat",
-    ":libexfat_internal",
-  ]
+  deps = [ ":libexfat" ]
   install_enable = true
   subsystem_name = "thirdparty"
   part_name = "exfatprogs"
