@@ -43,6 +43,20 @@ config("exfat-defaults") {
   ]
 }
 
+###################################################
+## Internal API source set (exfat_fs.h + exfat_dir.h)
+## Used by in-repo executables that need internal symbols
+## not exported by the shared library.
+ohos_source_set("libexfat_internal") {
+  configs = [ ":exfat-defaults" ]
+  sources = [
+    "lib/exfat_fs.c",
+    "lib/exfat_dir.c",
+  ]
+}
+
+###################################################
+## Public shared library - only exports libexfat.h API
 ohos_shared_library("libexfat") {
   branch_protector_ret = "pac_ret"
   configs = [ ":exfat-defaults" ]
@@ -51,9 +65,12 @@ ohos_shared_library("libexfat") {
     "lib/exfat_fs.c",
     "lib/libexfat.c",
   ]
-  version_script = "libexfat.map"
 
-  include_dirs = [ "./libexfat" ]
+  include_dirs = [ "./include" ]
+
+  ldflags = [ "-Wl,--exclude-libs=ALL" ]
+
+  version_script = "libexfat.map"
 
   deps = []
   install_enable = true
@@ -77,7 +94,10 @@ ohos_executable("mkfs.exfat") {
     "./mkfs",
   ]
 
-  deps = [ ":libexfat" ]
+  deps = [
+    ":libexfat",
+    ":libexfat_internal",
+  ]
   install_enable = true
   subsystem_name = "thirdparty"
   part_name = "exfatprogs"
@@ -101,7 +121,10 @@ ohos_executable("fsck.exfat") {
     "./fsck",
   ]
 
-  deps = [ ":libexfat" ]
+  deps = [
+    ":libexfat",
+    ":libexfat_internal",
+  ]
   install_enable = true
   subsystem_name = "thirdparty"
   part_name = "exfatprogs"
@@ -122,7 +145,10 @@ ohos_executable("dump.exfat") {
     "./dump",
   ]
 
-  deps = [ ":libexfat" ]
+  deps = [
+    ":libexfat",
+    ":libexfat_internal",
+  ]
   subsystem_name = "thirdparty"
   part_name = "exfatprogs"
 }
@@ -141,7 +167,10 @@ ohos_executable("exfatlabel") {
     "./label",
   ]
 
-  deps = [ ":libexfat" ]
+  deps = [
+    ":libexfat",
+    ":libexfat_internal",
+  ]
   subsystem_name = "thirdparty"
   part_name = "exfatprogs"
 }
@@ -160,7 +189,10 @@ ohos_executable("tune.exfat") {
     "./label",
   ]
 
-  deps = [ ":libexfat" ]
+  deps = [
+    ":libexfat",
+    ":libexfat_internal",
+  ]
   subsystem_name = "thirdparty"
   part_name = "exfatprogs"
 }
@@ -179,7 +211,10 @@ ohos_executable("exfat2img") {
     "./exfat2img",
   ]
 
-  deps = [ ":libexfat" ]
+  deps = [
+    ":libexfat",
+    ":libexfat_internal",
+  ]
   subsystem_name = "thirdparty"
   part_name = "exfatprogs"
 }
