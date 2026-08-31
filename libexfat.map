@@ -1,0 +1,106 @@
+/* SPDX-License-Identifier: GPL-2.0-or-later */
+/*
+ * Version script for libexfat.so (OpenHarmony GN build, see BUILD.gn).
+ *
+ * libexfat.so is built from: lib/exfat_dir.c, lib/exfat_fs.c, lib/libexfat.c.
+ * lib/utils.c is intentionally NOT part of the shared object.
+ *
+ * Exports the public API declared in include/libexfat.h, include/exfat_fs.h
+ * and include/exfat_dir.h, plus the "print_level" control variable used by the
+ * exfat_err/exfat_info/exfat_debug logging macros. Every other symbol
+ * (static helpers, file-local globals, etc.) is hidden via "local: *;".
+ *
+ * To take effect, reference this file from the ohos_shared_library("libexfat")
+ * target in BUILD.gn:
+ *
+ *     version_script = "libexfat.map"
+ *
+ * NOTE: when a new public symbol is added to one of the three headers, it must
+ * also be listed below, otherwise it will be hidden and become an ABI break.
+ */
+
+EXFATPROGS_1.0 {
+	global:
+		/* include/libexfat.h */
+		exfat_bitmap_set_range;
+		exfat_bitmap_find_zero;
+		exfat_bitmap_find_one;
+		show_version;
+		exfat_bad_char;
+		boot_calc_checksum;
+		init_user_input;
+		exfat_get_blk_dev_info;
+		exfat_read;
+		exfat_write;
+		exfat_write_zero;
+		exfat_discard_blocks;
+		exfat_utf16_len;
+		exfat_utf16_enc;
+		exfat_utf16_dec;
+		exfat_get_root_entry_offset;
+		exfat_read_volume_label;
+		exfat_set_volume_label;
+		__exfat_set_volume_guid;
+		exfat_read_volume_guid;
+		exfat_set_volume_guid;
+		exfat_read_sector;
+		exfat_write_sector;
+		exfat_write_checksum_sector;
+		exfat_conv_volume_label;
+		exfat_show_volume_serial;
+		exfat_set_volume_serial;
+		exfat_clus_to_blk_dev_off;
+		exfat_get_next_clus;
+		exfat_get_inode_next_clus;
+		exfat_get_clus;
+		exfat_set_fat;
+		exfat_s2o;
+		exfat_c2o;
+		exfat_o2c;
+		exfat_heap_clus;
+		exfat_root_clus_count;
+		read_boot_sect;
+		exfat_parse_ulong;
+		exfat_check_name;
+		exfat_check_written_data;
+		print_level;
+
+		/* include/exfat_fs.h */
+		exfat_alloc_exfat;
+		exfat_free_exfat;
+		exfat_alloc_inode;
+		exfat_free_inode;
+		exfat_free_children;
+		exfat_free_file_children;
+		exfat_free_ancestors;
+		exfat_free_dir_list;
+		exfat_resolve_path;
+		exfat_resolve_path_parent;
+		exfat_alloc_buffer;
+		exfat_free_buffer;
+
+		/* include/exfat_dir.h */
+		exfat_de_iter_init;
+		exfat_de_iter_get;
+		exfat_de_iter_get_dirty;
+		exfat_de_iter_flush;
+		exfat_de_iter_advance;
+		exfat_de_iter_revert;
+		exfat_de_iter_device_offset;
+		exfat_de_iter_file_offset;
+		exfat_lookup_dentry_set;
+		exfat_lookup_file;
+		exfat_lookup_file_by_utf16name;
+		exfat_create_file;
+		exfat_update_file_dentry_set;
+		exfat_build_file_dentry_set;
+		exfat_add_dentry_set;
+		exfat_calc_dentry_checksum;
+		calc_dentry_set_checksum;
+		exfat_calc_name_hash;
+		exfat_find_free_cluster;
+		exfat_alloc_cluster;
+
+	local:
+		*;
+};
