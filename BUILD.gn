@@ -51,6 +51,7 @@ ohos_shared_library("libexfat") {
     "lib/exfat_fs.c",
     "lib/libexfat.c",
   ]
+  version_script = "libexfat.map"
 
   include_dirs = [ "./libexfat" ]
 
