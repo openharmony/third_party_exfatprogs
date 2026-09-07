@@ -51,6 +51,40 @@ global:
     exfat_check_written_data;
     print_level;
 
+    # exfat_fs.h + exfat_dir.h - Internal API
+    calc_dentry_set_checksum;
+    exfat_add_dentry_set;
+    exfat_alloc_buffer;
+    exfat_alloc_cluster;
+    exfat_alloc_exfat;
+    exfat_alloc_inode;
+    exfat_build_file_dentry_set;
+    exfat_calc_dentry_checksum;
+    exfat_calc_name_hash;
+    exfat_create_file;
+    exfat_de_iter_advance;
+    exfat_de_iter_device_offset;
+    exfat_de_iter_file_offset;
+    exfat_de_iter_flush;
+    exfat_de_iter_get;
+    exfat_de_iter_get_dirty;
+    exfat_de_iter_init;
+    exfat_de_iter_revert;
+    exfat_find_free_cluster;
+    exfat_free_ancestors;
+    exfat_free_buffer;
+    exfat_free_children;
+    exfat_free_dir_list;
+    exfat_free_exfat;
+    exfat_free_file_children;
+    exfat_free_inode;
+    exfat_lookup_dentry_set;
+    exfat_lookup_file;
+    exfat_lookup_file_by_utf16name;
+    exfat_resolve_path;
+    exfat_resolve_path_parent;
+    exfat_update_file_dentry_set;
+
 local:
     *;
 };
