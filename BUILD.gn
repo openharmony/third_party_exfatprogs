@@ -52,7 +52,7 @@ ohos_shared_library("libexfat") {
     "lib/libexfat.c",
   ]
 
-  include_dirs = [ "./include" ]
+include_dirs = [ "./libexfat" ]
 
   ldflags = [ "-Wl,--exclude-libs=ALL" ]
 
