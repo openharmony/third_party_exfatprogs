@@ -54,6 +54,10 @@ ohos_shared_library("libexfat") {
 
   include_dirs = [ "./libexfat" ]
 
+  ldflags = [ "-Wl,--exclude-libs=ALL" ]
+
+  version_script = "libexfat.map"
+
   deps = []
   install_enable = true
   subsystem_name = "thirdparty"
